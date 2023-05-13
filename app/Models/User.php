@@ -4,6 +4,7 @@ namespace App\Models;
 
 // use Illuminate\Contracts\Auth\MustVerifyEmail;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
+use Illuminate\Database\Eloquent\Relations\HasMany;
 use Illuminate\Foundation\Auth\User as Authenticatable;
 use Illuminate\Notifications\Notifiable;
 use Laravel\Sanctum\HasApiTokens;
@@ -18,7 +19,8 @@ class User extends Authenticatable
      * @var array<int, string>
      */
     protected $fillable = [
-        'name',
+        'firstName',
+        'lastName',
         'email',
         'password',
     ];
@@ -41,4 +43,28 @@ class User extends Authenticatable
     protected $casts = [
         'email_verified_at' => 'datetime',
     ];
+
+    /**
+     * user has many padlets (1:n)
+     */
+    public function padlets() : HasMany
+    {
+        return $this->hasMany(Padlet::class);
+    }
+
+    /**
+     * user has userrights to many padlets
+     */
+    public function userrights(): HasMany
+    {
+        return $this->hasMany(Userright::class);
+    }
+
+    public function ratings() : HasMany {
+        return $this->hasMany(Rating::class);
+    }
+
+    public function comments() : HasMany {
+        return $this->hasMany(Comment::class);
+    }
 }
