@@ -16,6 +16,6 @@ use Illuminate\Support\Facades\Route;
 |
 */
 
-Route::get('/', [PadletController::class,'index']);
-Route::get('/padlets', [PadletController::class,'index']);
-Route::get('/padlets/{padlet}',[PadletController::class,'show']);
+//Route::get('/', [PadletController::class,'index']);
+//Route::get('/padlets', [PadletController::class,'index']);
+//Route::get('/padlets/{padlet}',[PadletController::class,'show']);
