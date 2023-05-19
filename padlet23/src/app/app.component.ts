@@ -1,4 +1,6 @@
 import { Component } from '@angular/core';
+import {Padlet} from "./shared/padlet";
+import {HttpClient} from "@angular/common/http";
 
 @Component({
   selector: 'bs-root',
@@ -6,5 +8,10 @@ import { Component } from '@angular/core';
   styles: []
 })
 export class AppComponent {
-  title = 'padlet23';
+  // padlet : Padlet | undefined;
+  //
+  // constructor(private http: HttpClient){
+  //   http.get<Padlet>('http://padlet23.s2010456025.student.kwmhgb.at')
+  //     .subscribe(val => this.padlet = val);
+  // }
 }

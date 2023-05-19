@@ -1,0 +1,53 @@
+<div class="min-h-screen pl-6 pr-6 relative">
+  <div class="text-sm breadcrumbs mb-6">
+    <ul>
+      <li><a routerLink="../../home">Home</a></li>
+      <li><a routerLink="../../padlets">Padlets</a></li>
+      <li>All Pins</li>
+    </ul>
+  </div>
+
+  <a routerLink="./action" class="sticky z-10 top-[90%] left-[95%] mb-6 btn btn-primary transition-colors rounded-full shadow-lg"
+    routerLinkActive="active">
+    <svg class="w-4 h-4 fill-current" viewBox="0 0 20 20"><path d="M10 3a1 1 0 011 1v5h5a1 1 0 110 2h-5v5a1 1 0 11-2 0v-5H4a1 1 0 110-2h5V4a1 1 0 011-1z" clip-rule="evenodd" fill-rule="evenodd"></path></svg>
+  </a>
+
+  <div class="flex flex-row flex-wrap justify-evenly">
+    <div *ngFor="let entrie of entries" class="w-full md:w-[32%] mb-6">
+      <div class="card bg-base-100 shadow-xl">
+        <figure class="max-h-[150px]"><img src="https://images.pexels.com/photos/616838/pexels-photo-616838.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=2" alt="Shoes" /></figure>
+        <div class="card-body">
+          <h2 class="card-title">{{entrie?.title}}</h2>
+          <p>{{entrie?.content}}</p>
+          <div class="absolute top-6 right-2">
+
+            <!-- TODO ==========> mit ngIf auf Rechte überprüfen -->
+            <!-- edit button -->
+            <!-- *ngIf="authService.hasRights()"-->
+            <a routerLink="./{{entrie.id}}"
+               class="inline-flex items-center justify-center w-10 h-10 mr-2 text-gray-700 transition-colors duration-150 bg-white rounded-md focus:shadow-outline hover:bg-gray-200"
+               routerLinkActive="active">
+              <svg class="w-4 h-4 fill-current" viewBox="0 0 20 20"><path d="M13.586 3.586a2 2 0 112.828 2.828l-.793.793-2.828-2.828.793-.793zM11.379 5.793L3 14.172V17h2.828l8.38-8.379-2.83-2.828z"></path></svg>
+            </a>
+
+          </div>
+        </div>
+        <div class="card-body">
+          Comments and Ratings
+
+          <!--rating input-->
+          <div class="rating gap-1">
+            <input type="radio" name="{{entrie.id}}" class="rating-hidden" />
+            <input type="radio" name="{{entrie.id}}" class="mask mask-heart bg-orange-400" />
+            <input type="radio" name="{{entrie.id}}" class="mask mask-heart bg-orange-400" checked />
+            <input type="radio" name="{{entrie.id}}" class="mask mask-heart bg-orange-400" />
+            <input type="radio" name="{{entrie.id}}" class="mask mask-heart bg-orange-400" />
+            <input type="radio" name="{{entrie.id}}" class="mask mask-heart bg-orange-400" />
+          </div>
+
+          <!--rating input-->
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
