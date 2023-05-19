@@ -22,18 +22,18 @@ class EntrieController extends Controller
     public function getAllEntries(int $padlet_id): JsonResponse {
         /* load all books and relations with eager loading,
         which means "load all related objects" */
-        $entries = Entrie::where('id', $padlet_id)
+        $entries = Entrie::where('padlet_id', $padlet_id)
             ->with(['comments', 'ratings'])
             ->get();
         return $entries != null ? response()->json($entries, 200) : response()->json(null, 200);
     }
 
-    public function getEntrie(int $entrie_id): JsonResponse {
+    public function getEntrie(int $padlet_id, int $entrie_id): JsonResponse {
         /* load all books and relations with eager loading,
         which means "load all related objects" */
         $entrie = Entrie::where('id', $entrie_id)
             ->with(['comments', 'ratings'])
-            ->get();
+            ->first();
         return $entrie != null ? response()->json($entrie, 200) : response()->json(null, 200);
     }
     public function saveEntries(int $padlet_id, Request $request) : JsonResponse {
@@ -60,7 +60,7 @@ class EntrieController extends Controller
         //TODO user id aus session storage auslesen
         return $userId;
     }
-    public function updateEntries(Request $request, int $entrie_id) : JsonResponse
+    public function updateEntries(int $padlet_id, int $entrie_id, Request $request) : JsonResponse
     {
         DB::beginTransaction();
         try {
@@ -107,14 +107,14 @@ class EntrieController extends Controller
         }
     }
 
-    public function deleteEntrie(int $id) : JsonResponse {
-        $entrie = Entrie::where('id', $id)->first();
+    public function deleteEntrie(int $padlet_id, int $entrie_id) : JsonResponse {
+        $entrie = Entrie::where('id', $entrie_id)->first();
         if ($entrie != null) {
             $title = $entrie['title'];
             $entrie->delete();
-            return response()->json('padlet (' . $title . ') successfully deleted', 200);
+            return response()->json('entrie (' . $title . ') successfully deleted', 200);
         }
         else
-            return response()->json('padlet could not be deleted - it does not exist', 422);
+            return response()->json('entrie could not be deleted - it does not exist', 422);
     }
 }
