@@ -19,6 +19,15 @@ class PadletController extends Controller
         return response()->json($padlets, 200);
     }
 
+    public function getPadlet(int $padlet_id): JsonResponse {
+        /* load all books and relations with eager loading,
+        which means "load all related objects" */
+        $padlet = Padlet::where('id', $padlet_id)
+            ->with(['user', 'entries'])
+            ->first();
+        return $padlet != null ? response()->json($padlet, 200) : response()->json(null, 200);
+    }
+
     public function savePadlets(Request $request) : JsonResponse {
         DB::beginTransaction();
         try {

@@ -1,7 +1,7 @@
 import { Padlet } from './padlet';
 export class PadletFactory {
   static empty(): Padlet {
-    return new Padlet('', '', 0, false, new Date());
+    return new Padlet('', '', 0, true, new Date());
   }
 
   static fromObject(rawPadlet: any): Padlet {

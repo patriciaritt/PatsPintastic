@@ -1,9 +1,9 @@
 <div class="min-h-screen pl-6 pr-6 relative">
   <div class="text-sm breadcrumbs mb-6">
     <ul>
-      <li><a routerLink="../../home">Home</a></li>
-      <li><a routerLink="../../padlets">Padlets</a></li>
-      <li><a routerLink="../">All Pins</a></li>
+      <li><a routerLink="../../../../">Home</a></li>
+      <li><a routerLink="../../../">Padlets</a></li>
+      <li><a routerLink="../../">All Pins</a></li>
       <li *ngIf="entrie.title; else newEntry"> {{ entrie.title }} </li>
       <ng-template #newEntry> <li> New Entry </li></ng-template>
     </ul>

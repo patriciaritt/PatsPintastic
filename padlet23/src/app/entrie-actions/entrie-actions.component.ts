@@ -4,6 +4,8 @@ import {FormArray, FormBuilder, FormGroup, Validators} from "@angular/forms";
 import {Entrie} from "../shared/entrie";
 import {EntrieFactory} from "../shared/entrie-factory";
 import {EntrieService} from "../shared/entrie.service";
+import {AuthenticationService} from "../shared/authentication.service";
+import {ToastrService} from "ngx-toastr";
 
 @Component({
   selector: 'bs-entrie-actions',
@@ -20,7 +22,9 @@ export class EntrieActionsComponent implements OnInit{
     private fb: FormBuilder,
     private es: EntrieService,
     private route: ActivatedRoute,
-    private router:Router
+    private router:Router,
+    private toastr:ToastrService,
+    public authService: AuthenticationService
   ) {
     this.entrieForm = this.fb.group({});
   }
@@ -49,7 +53,7 @@ export class EntrieActionsComponent implements OnInit{
     const params = this.route.snapshot.params;
     this.es.deleteEntrie(params['id'], params['entrie_id']).subscribe(
       (e:any) => {
-        this.router.navigate(['../'],
+        this.router.navigate(['../../'],
           {relativeTo: this.route});
       }
     )
@@ -61,7 +65,7 @@ export class EntrieActionsComponent implements OnInit{
 
     if (this.isUpdateingEntrie) {
       this.es.updateEntrie(params['id'], entrie).subscribe(res => {
-        this.router.navigate(["../"], {
+        this.router.navigate(["../../"], {
           relativeTo: this.route
         });
       });
@@ -73,7 +77,7 @@ export class EntrieActionsComponent implements OnInit{
       this.es.createEntrie(params['id'], entrie).subscribe(res => {
         this.entrie = EntrieFactory.empty();
         this.entrieForm.reset(EntrieFactory.empty());
-        this.router.navigate(["../"], { relativeTo: this.route });
+        this.router.navigate(["../../"], { relativeTo: this.route });
       });
     }
   }

@@ -1,0 +1,62 @@
+<div class="min-h-screen pl-6 pr-6 relative">
+  <div class="text-sm breadcrumbs mb-6">
+    <ul>
+      <li><a routerLink="../../../home">Home</a></li>
+      <li><a routerLink="../../">Padlets</a></li>
+      <li *ngIf="padlet.name; else newEntry"> {{ padlet.name }} </li>
+      <ng-template #newEntry> <li> New Padlet </li></ng-template>
+    </ul>
+  </div>
+
+  <form class="card bg-base-100 shadow-xl ml-[15%] mr-[15%] mb-6" [formGroup]="padletForm" (ngSubmit)="submitForm()">
+    <div class="card-body">
+      <!-- heading -->
+      <h2 class="card-title" *ngIf="padlet.name; else newEntryHeading">{{padlet.name}}</h2>
+      <ng-template #newEntryHeading><h2 class="card-title">Create a new Padlet</h2></ng-template>
+
+      <!-- title -->
+      <div class="form-control w-full">
+        <label class="label">
+          <span class="label-text">Padlet Name</span>
+        </label>
+        <input formControlName="name" type="text" placeholder="Type here" class="input input-bordered w-full">
+      </div>
+
+      <!-- is_public -->
+
+
+      <!-- date -->
+      <div class="form-control w-full">
+        <label class="label">
+          <span class="label-text">Created at</span>
+        </label>
+        <input type="text" placeholder="{{padlet.created_at | date:'longDate'}}" class="input input-bordered w-full max-w-xs" disabled/>
+      </div>
+    </div>
+
+    <div class="flex justify-between ml-8 mr-8 mb-6">
+      <!-- button to safe changes -->
+      <button type="submit" class="btn btn-primary">Safe changes</button>
+
+      <!-- button to open modal -->
+
+      <!-- The button to open modal -->
+      <label for="my-modal-6" class="btn btn-error">Delete</label>
+
+      <!-- Put this part before </body> tag -->
+      <input type="checkbox" id="my-modal-6" class="modal-toggle" />
+      <div class="modal modal-bottom sm:modal-middle">
+        <div class="modal-box">
+          <h3 class="font-bold text-lg">Do you really want to delete the padlet "{{padlet.name}}" and all it's Pins?</h3>
+          <div class="flex justify-center items-center modal-action">
+            <label for="my-modal-6" class="btn">Cancel</label>
+            <button class="btn btn-error max-w-[50%]" (click)="deletePadlet()">Delete</button>
+          </div>
+        </div>
+      </div>
+
+    </div>
+
+  </form>
+</div>
+

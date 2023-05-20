@@ -10,8 +10,9 @@
                     class="card card-side shadow-xl mt-5 ml-24 mr-24 mb-5 glass"
                     [padlet]="padlet" [routerLink]="padlet.id">
   </padlet-list-item>
-  <button class="absolute sticky z-10 top-[90%] left-[95%] mb-6 btn btn-primary transition-colors rounded-full shadow-lg">
+  <a routerLink="./padlet/new" class="sticky z-10 top-[90%] left-[95%] mb-6 btn btn-primary transition-colors rounded-full shadow-lg"
+    routerLinkActive="active">
     <svg class="w-4 h-4 fill-current" viewBox="0 0 20 20"><path d="M10 3a1 1 0 011 1v5h5a1 1 0 110 2h-5v5a1 1 0 11-2 0v-5H4a1 1 0 110-2h5V4a1 1 0 011-1z" clip-rule="evenodd" fill-rule="evenodd"></path></svg>
-  </button>
+  </a>
 </div>
 
