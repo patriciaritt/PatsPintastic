@@ -23,8 +23,8 @@ class UsersTableSeeder extends Seeder
         $user = new User();
         $user->firstName = 'Patricia';
         $user->lastName = 'Ritt';
-        $user->email = "user@test.at";
-        $user->password = "secret";
+        $user->email = "patriciaritt15@gmail.com";
+        $user->password = bcrypt("secret");
         $user->image = "https://images.unsplash.com/photo-1683480678001-d2b60353b0fb?ixlib=rb-4.0.3&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=726&q=80";
         $user->save();
     }

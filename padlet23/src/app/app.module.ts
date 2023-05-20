@@ -10,8 +10,16 @@ import { EntrieActionsComponent } from './entrie-actions/entrie-actions.componen
 import { BrowserModule } from '@angular/platform-browser';
 import { PadletService } from "./shared/padlet.service";
 import {AppRoutingModule} from "./app-routing.module";
-import {HttpClientModule} from "@angular/common/http";
+import {HTTP_INTERCEPTORS, HttpClientModule} from "@angular/common/http";
 import {ReactiveFormsModule} from "@angular/forms";
+import { PadletActionsComponent } from './padlet-actions/padlet-actions.component';
+import { LoginComponent } from './login/login.component';
+import {AuthenticationService} from "./shared/authentication.service";
+import {EntrieService} from "./shared/entrie.service";
+import {TokenInterceptorService} from "./shared/token-interceptor.service";
+import {JwtInterceptorService} from "./shared/jwt-interceptor.service";
+import {BrowserAnimationsModule} from "@angular/platform-browser/animations";
+import {ToastrModule} from "ngx-toastr";
 
 @NgModule({
   declarations: [
@@ -20,12 +28,26 @@ import {ReactiveFormsModule} from "@angular/forms";
     PadletListItemComponent,
     PadletDetailsComponent,
     HomeComponent,
-    EntrieActionsComponent
+    EntrieActionsComponent,
+    PadletActionsComponent,
+    LoginComponent
   ],
   imports: [
-    BrowserModule, AppRoutingModule, HttpClientModule, ReactiveFormsModule
+    BrowserModule, AppRoutingModule, HttpClientModule, BrowserAnimationsModule, ToastrModule.forRoot(),
+    ReactiveFormsModule
   ],
-  providers: [PadletService],
+  providers: [PadletService, EntrieService, AuthenticationService,
+    {
+      provide: HTTP_INTERCEPTORS,
+      useClass: TokenInterceptorService,
+      multi: true
+    },
+    {
+      provide: HTTP_INTERCEPTORS,
+      useClass: JwtInterceptorService,
+      multi: true
+    }
+  ],
   bootstrap: [AppComponent]
 })
 export class AppModule { }
