@@ -37,7 +37,6 @@ export class PadletActionsComponent implements OnInit{
           this.padlet = p;
           this.initPadlet();
         });
-      console.log(this.padlet);
     }
     this.initPadlet();
   }
@@ -47,7 +46,8 @@ export class PadletActionsComponent implements OnInit{
       id: this.padlet.id,
       name: this.padlet.name,
       user_id: this.padlet.user_id,
-      is_public: this.padlet.is_public
+      is_public: this.padlet.is_public,
+      image: this.padlet.image
     });
   }
   deletePadlet(){
@@ -72,9 +72,9 @@ export class PadletActionsComponent implements OnInit{
       });
     }
     else {
-      padlet.user_id = 1; // just for testing
+      //padlet.user_id = 1; // just for testing
       const params = this.route.snapshot.params;
-      //padlet.user_id = sessionStorage.getItem("userId"); //wenn ma mehr user hat
+      padlet.user_id = parseInt(sessionStorage.getItem("userId") ?? '0', 10); //wenn ma mehr user hat
       this.ps.createPadlet(padlet).subscribe(res => {
         this.padlet = PadletFactory.empty();
         this.padletForm.reset(PadletFactory.empty());

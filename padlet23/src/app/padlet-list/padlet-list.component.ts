@@ -1,6 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import {Padlet} from "../shared/padlet";
 import {PadletService} from "../shared/padlet.service";
+import {AuthenticationService} from "../shared/authentication.service";
 
 @Component({
   selector: 'bs-padlet-list',
@@ -10,10 +11,10 @@ import {PadletService} from "../shared/padlet.service";
 })
 export class PadletListComponent implements OnInit {
   padlets: Padlet[] = [];
-  constructor(private bs:PadletService) {
+  constructor(private ps:PadletService, public authService: AuthenticationService) {
   }
   ngOnInit() {
-    this.bs.getAll().subscribe(
+    this.ps.getAll().subscribe(
       res => this.padlets = res
     );
   }

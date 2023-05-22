@@ -34,7 +34,6 @@ export class LoginComponent {
     const val = this.loginForm.value;
     if (val.username && val.password) {
       this.authService.login(val.username, val.password).subscribe((res: any) => {
-        console.log(res);
         this.authService.setSessionStorage((res as Response).access_token);
         this.router.navigateByUrl("/padlets");  //schick erm damit auf die home seite
       });
@@ -44,6 +43,7 @@ export class LoginComponent {
     return this.authService.isLoggedIn();
   }
   logout() {
+    this.router.navigateByUrl("/home");
     return this.authService.logout();
   }
 }

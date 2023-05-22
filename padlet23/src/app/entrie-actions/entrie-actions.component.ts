@@ -46,7 +46,8 @@ export class EntrieActionsComponent implements OnInit{
     this.entrieForm = this.fb.group({
       id: this.entrie.id,
       title: this.entrie.title,
-      content: this.entrie.content
+      content: this.entrie.content,
+      image: this.entrie.image
     });
   }
   deleteEntrie(){
@@ -71,9 +72,9 @@ export class EntrieActionsComponent implements OnInit{
       });
     }
     else {
-      entrie.user_id = 1; // just for testing
+      //entrie.user_id = 1; // just for testing
       const params = this.route.snapshot.params;
-      //entrie.user_id = sessionStorage.getItem("userId"); //wenn ma mehr user hat
+      entrie.user_id = parseInt(sessionStorage.getItem("userId") ?? '0', 10); //wenn ma mehr user hat
       this.es.createEntrie(params['id'], entrie).subscribe(res => {
         this.entrie = EntrieFactory.empty();
         this.entrieForm.reset(EntrieFactory.empty());
