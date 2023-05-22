@@ -10,7 +10,7 @@ use Illuminate\Database\Eloquent\Relations\HasMany;
 class Entrie extends Model
 {
     use HasFactory;
-    protected $fillable = ['user_id', 'padlet_id','title', 'content'];
+    protected $fillable = ['user_id', 'padlet_id','title', 'content', 'image'];
 
     /**
      * entrie has one creator (user)

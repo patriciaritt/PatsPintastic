@@ -18,6 +18,7 @@ return new class extends Migration
             $table->foreignId('padlet_id')->constrained()->onDelete('cascade');
             $table->primary(['user_id','padlet_id']);
             $table->boolean('read')->default(true);
+            $table->boolean('write')->default(false);
             $table->boolean('edit')->default(false);
             $table->boolean('delete')->default(false);
             $table->timestamps();

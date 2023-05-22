@@ -9,7 +9,7 @@ use Illuminate\Database\Eloquent\Relations\HasMany;
 class Padlet extends Model
 {
     use HasFactory;
-    protected $fillable = ['name', 'user_id', 'is_public'];
+    protected $fillable = ['name', 'user_id', 'is_public', 'image'];
 
     /**
      * padlet has one creator (user)

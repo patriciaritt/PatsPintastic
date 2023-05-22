@@ -19,6 +19,7 @@ return new class extends Migration
             $table->foreignId('padlet_id')->constrained()->onDelete('cascade');
             $table->string('title');
             $table->text('content');
+            $table->string('image');
             $table->timestamps();
         });
     }

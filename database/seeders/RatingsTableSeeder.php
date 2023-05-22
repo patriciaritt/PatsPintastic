@@ -16,9 +16,13 @@ class RatingsTableSeeder extends Seeder
     public function run()
     {
         $rating1 = new Rating();
-        $rating1->user_id = 1;
         $rating1->entrie_id = 1;
         $rating1->rating = 4;
         $rating1->save();
+
+        $rating2 = new Rating();
+        $rating2->entrie_id = 2;
+        $rating2->rating = 6;
+        $rating2->save();
     }
 }
