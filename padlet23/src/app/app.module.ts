@@ -20,6 +20,7 @@ import {TokenInterceptorService} from "./shared/token-interceptor.service";
 import {JwtInterceptorService} from "./shared/jwt-interceptor.service";
 import {BrowserAnimationsModule} from "@angular/platform-browser/animations";
 import {ToastrModule} from "ngx-toastr";
+import { CommentsRatingsComponent } from './comments-ratings/comments-ratings.component';
 
 @NgModule({
   declarations: [
@@ -30,7 +31,8 @@ import {ToastrModule} from "ngx-toastr";
     HomeComponent,
     EntrieActionsComponent,
     PadletActionsComponent,
-    LoginComponent
+    LoginComponent,
+    CommentsRatingsComponent
   ],
   imports: [
     BrowserModule, AppRoutingModule, HttpClientModule, BrowserAnimationsModule, ToastrModule.forRoot(),

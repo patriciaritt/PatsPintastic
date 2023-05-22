@@ -6,6 +6,9 @@ interface Token {
   exp: number;
   user: {
     id: string;
+    firstName: string;
+    lastName: string;
+    image:string;
   };
 }
 
@@ -17,8 +20,6 @@ export class AuthenticationService {
   constructor(private http:HttpClient) { }
 
   login(email:String, password:String) {
-    console.log(email);
-    console.log(password);
     return this.http.post(`${this.api}/login`,
       {email:email, password:password});
   }
@@ -28,20 +29,16 @@ export class AuthenticationService {
     this.http.post(`${this.api}/logout`, {});
     sessionStorage.removeItem("token");
     sessionStorage.removeItem("userId");
-    console.log("logged out");
   }
 
   isLoggedIn()
   {
     if (sessionStorage.getItem("token")) {
       let token: string = <string>sessionStorage.getItem("token");
-      console.log(jwt_decode(token));
       const decodedToken = jwt_decode(token) as Token;
-      //datum generieren aus timestamp
       let expirationDate: Date = new Date(0);
       expirationDate.setUTCSeconds(decodedToken.exp);
       if (expirationDate < new Date()) {
-        console.log("token expired");
         sessionStorage.removeItem("token");
         return false;
       }
@@ -55,19 +52,12 @@ export class AuthenticationService {
 
   setSessionStorage(token: string)
   {
-    //hier rollen von verschiedene user speichern und von dort wieder abfragen
     const decodedToken = jwt_decode(token) as Token;
     console.log(decodedToken);
     sessionStorage.setItem("token", token);
     sessionStorage.setItem("userId", decodedToken.user.id);
+    sessionStorage.setItem("firstName", decodedToken.user.firstName);
+    sessionStorage.setItem("lastName", decodedToken.user.lastName);
+    sessionStorage.setItem("image", decodedToken.user.image);
   }
-
-  isLoggedOut() {
-    return !this.isLoggedIn();
-  }
-
-  // isAdmin(){
-  //   return this.isLoggedIn() &&
-  //     sessionStorage.getItem('role') =='admin';
-  // }
 }

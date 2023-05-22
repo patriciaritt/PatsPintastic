@@ -9,8 +9,9 @@ export class Entrie {
     public padlet_id: number,
     public title: string,
     public content: string,
+    public image: string,
     public created_at: Date,
-    public comment?: Comment[],
-    public rating?: Rating[]
+    public comments?: Comment[],
+    public ratings?: Rating[]
   ){}
 }

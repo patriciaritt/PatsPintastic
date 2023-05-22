@@ -11,7 +11,7 @@ class Userright extends Model
 {
     use HasFactory;
 
-    protected $fillable = ['user_id', 'padlet_id', 'read', 'edit', 'delete'];
+    protected $fillable = ['user_id', 'padlet_id', 'read', 'write', 'edit', 'delete'];
 
     /**
      * padlet has one creator (user)

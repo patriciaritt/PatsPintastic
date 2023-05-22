@@ -1,7 +1,7 @@
 import { Injectable } from '@angular/core';
 import {HttpClient} from "@angular/common/http";
 import {catchError, Observable, retry, throwError} from "rxjs";
-import {Entrie} from "./entrie";
+import {Entrie, Rating} from "./entrie";
 @Injectable({
   providedIn: 'root'
 })
@@ -30,6 +30,11 @@ export class EntrieService {
   createEntrie(padlet_id:number, entrie:Entrie):Observable<any>
   {
     return this.http.post(`${this.api}/padlets/${padlet_id}`, entrie)
+      .pipe(retry(3)).pipe(catchError(this.errorHandler));
+  }
+
+  likeEntrie(padlet_id:number, entrie_id:number, rating:Rating):Observable<any>{
+    return this.http.put(`${this.api}/comments/${padlet_id}/${entrie_id}`, rating)
       .pipe(retry(3)).pipe(catchError(this.errorHandler));
   }
 

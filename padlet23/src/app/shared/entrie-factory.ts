@@ -1,7 +1,7 @@
 import { Entrie } from './entrie';
 export class EntrieFactory {
   static empty(): Entrie {
-    return new Entrie(0, 0, 0, '', '', new Date(), [], []);
+    return new Entrie(0, 0, 0, '', '', '', new Date(), [], []);
   }
 
   static fromObject(rawEntrie: any): Entrie {
@@ -11,9 +11,10 @@ export class EntrieFactory {
       rawEntrie.padlet_id,
       rawEntrie.title,
       rawEntrie.content,
+      rawEntrie.image,
       typeof(rawEntrie.created_at) === 'string' ? new Date(rawEntrie.created_at) : rawEntrie.created_at,
-      rawEntrie.comment,
-      rawEntrie.rating
+      rawEntrie.comments,
+      rawEntrie.ratings
     );
   }
 }
