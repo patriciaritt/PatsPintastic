@@ -87,8 +87,7 @@ class EntrieController extends Controller
                     foreach ($request['ratings'] as $value) {
                         $rating = Rating::firstOrNew([
                             'rating'=>$value['rating'],
-                            'entrie_id'=>$entrie_id,
-                            'user_id'=>$this->getCurrentUserId()
+                            'entrie_id'=>$entrie_id
                         ]);
                         $entrie->ratings()->save($rating);
                     }
@@ -117,4 +116,62 @@ class EntrieController extends Controller
         else
             return response()->json('entrie could not be deleted - it does not exist', 422);
     }
+
+    public function likeEntrie(int $entrie_id, Request $request): JsonResponse
+    {
+        DB::beginTransaction();
+        try {
+            $rating = Rating::where('entrie_id', $entrie_id)->first();
+            var_dump($rating);
+
+            if ($rating != null) {
+                $rating->update(['rating', $request['rating']]);
+                $rating->save();
+                DB::commit();
+            }
+
+            return response()->json('rating successfully updated', 201);
+        }
+        catch (\Exception $e) {
+            DB::rollBack();
+            return response()->json("updating rating failed: " . $e->getMessage(), 420);
+        }
+    }
+//    public function commentEntrie(int $padlet_id, int $entrie_id, Request $request){
+//        DB::beginTransaction();
+//        try {
+//            $entrie = Entrie::where('id', $entrie_id)
+//                ->with(['ratings'])->first();
+//
+//            if ($entrie != null) {
+//                // update ratings
+//                if (isset($request['ratings'])) {
+//                    foreach ($request['ratings'] as $value) {
+//                        $rating = Rating::where('entrie_id', $entrie_id)->first();
+//
+//                        var_dump($entrie_id);
+//                        var_dump($rating['rating']);
+//                        var_dump($value['rating']);
+//
+//                        if ($rating) {
+//                            $rating->update([
+//                                'rating' => $value['rating']
+//                            ]);
+//                            var_dump($rating['rating']);
+//                        }
+//                    }
+//                }
+//                $entrie->save();
+//
+//                DB::commit();
+//                return response()->json($entrie, 201);
+//            }
+//            return response()->json("Entrie not found", 420);
+//        }
+//        catch (\Exception $e) {
+//            // rollback all queries
+//            DB::rollBack();
+//            return response()->json("updating rating failed: " . $e->getMessage(), 420);
+//        }
+//    }
 }

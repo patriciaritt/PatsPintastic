@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\Models\Padlet;
+use App\Models\User;
 use Illuminate\Http\Request;
 use Illuminate\Http\JsonResponse;
 use Illuminate\Database\Eloquent;
@@ -70,5 +71,12 @@ class PadletController extends Controller
         }
         else
             return response()->json('padlet could not be deleted - it does not exist', 422);
+    }
+
+    public function getUserNamesOfComments()
+    {
+        $user = User::select('id', 'firstName', 'lastName')
+            ->get();
+        return $user != null ? response()->json($user, 200) : response()->json(null, 200);
     }
 }
