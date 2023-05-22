@@ -1,6 +1,8 @@
 <!-- TODO ==========> mit ngIf zusätzlich noch auf Rechte überprüfen (nicht nur is public) -->
-<figure *ngIf="padlet?.is_public" class="max-w-[0px] max-h-[0px] md:max-w-[400px] md:max-h-[300px] lg:max-h-[250px]"><img src="https://images.pexels.com/photos/616838/pexels-photo-616838.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=2" alt="Movie"/></figure>
-<div class="card-body" *ngIf="padlet?.is_public">
+<figure *ngIf="padlet?.is_public || isCreator()"
+        class="max-w-[0px] max-h-[0px] md:max-w-[400px] md:max-h-[300px] lg:max-h-[250px]">
+  <img src="{{padlet?.image}}" alt="Movie"/></figure>
+<div class="card-body" *ngIf="padlet?.is_public || isCreator()">
   <h2 class="card-title">{{padlet?.name}}</h2>
   <p>Created at: {{padlet?.created_at | date:'longDate'}}</p>
   <div class="card-actions justify-end">
@@ -10,7 +12,7 @@
   <!-- TODO ==========> mit ngIf auf Rechte überprüfen -->
   <!-- edit button -->
   <!-- *ngIf="authService.hasRights()"-->
-  <div class="absolute top-6 right-2">
+  <div class="absolute top-6 right-2" *ngIf="authService.isLoggedIn() && hasEditRights(padlet?.id)">
     <a routerLink="../padlets/padlet/{{padlet?.id}}"
        class="inline-flex items-center justify-center w-10 h-10 mr-2 text-gray-700 transition-colors duration-150 bg-white rounded-md focus:shadow-outline hover:bg-gray-200"
        routerLinkActive="active">

@@ -13,7 +13,7 @@
     <div class="card-body">
       <!-- heading -->
       <h2 class="card-title" *ngIf="entrie.title; else newEntryHeading">{{entrie.title}}</h2>
-      <ng-template #newEntryHeading><h2 class="card-title">Create a new Entry</h2></ng-template>
+      <ng-template #newEntryHeading><h2 class="card-title">Create a new Pin</h2></ng-template>
 
       <!-- title -->
       <div class="form-control w-full">
@@ -28,7 +28,15 @@
         <label class="label">
           <span class="label-text">Pin Content</span>
         </label>
-        <textarea formControlName="content" type="textarea" placeholder="Type here" class="input input-bordered w-full"></textarea>
+        <textarea formControlName="content" type="textarea" placeholder="Type here" class="textarea textarea-bordered"></textarea>
+      </div>
+
+      <!-- image -->
+      <div class="form-control w-full">
+        <label class="label">
+          <span class="label-text">Pin Image</span>
+        </label>
+        <input formControlName="image" type="text" placeholder="Insert image link" class="input input-bordered w-full">
       </div>
 
       <!-- date -->
@@ -60,8 +68,8 @@
               </div>
             </div>
           </div>
-
       </div>
-
   </form>
 </div>
+
+

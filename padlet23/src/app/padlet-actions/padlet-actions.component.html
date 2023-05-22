@@ -23,7 +23,22 @@
       </div>
 
       <!-- is_public -->
+      <div class="form-control w-full">
+        <label class="label">
+          <div class="flex flex-col">
+            <span class="label-text">Do you want to make this Padlet public? 👀 It's going to be visibile for the whole world!</span>
+            <input formControlName="is_public" type="checkbox" class="checkbox mt-1"/>
+          </div>
+        </label>
+      </div>
 
+      <!-- image -->
+      <div class="form-control w-full">
+        <label class="label">
+          <span class="label-text">Padlet Image</span>
+        </label>
+        <input formControlName="image" type="text" placeholder="Insert image link" class="input input-bordered w-full">
+      </div>
 
       <!-- date -->
       <div class="form-control w-full">
