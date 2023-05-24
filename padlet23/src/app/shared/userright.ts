@@ -6,7 +6,7 @@ export class Userright {
     public read: boolean,
     public write: boolean,
     public edit: boolean,
-    public del: boolean
+    public remove: boolean
   ) {
   }
 }
