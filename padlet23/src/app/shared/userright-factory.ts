@@ -13,7 +13,7 @@ export class UserrightFactory {
       rawUserright.read,
       rawUserright.write,
       rawUserright.edit,
-      rawUserright.del
+      rawUserright.remove
     )
   }
 }
