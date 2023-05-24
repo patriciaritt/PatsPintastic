@@ -6,10 +6,12 @@
     </ul>
   </div>
 
-  <padlet-list-item *ngFor="let padlet of padlets"
-                    class="card card-side shadow-xl mt-5 ml-24 mr-24 mb-5 glass"
-                    [padlet]="padlet" [routerLink]="padlet.id">
-  </padlet-list-item>
+  <div class="flex flex-col-reverse">
+    <padlet-list-item *ngFor="let padlet of padlets"
+                      class="card card-side shadow-xl mt-5 ml-24 mr-24 mb-5 glass"
+                      [padlet]="padlet" [routerLink]="padlet.id">
+    </padlet-list-item>
+  </div>
   <a routerLink="./padlet/new" *ngIf="authService.isLoggedIn()"
      class="fixed z-10 top-[90%] left-[93%] mb-6 btn btn-primary transition-colors rounded-full shadow-lg animate-pulse"
     routerLinkActive="active">

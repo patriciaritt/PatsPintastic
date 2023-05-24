@@ -3,35 +3,29 @@ from-blue-600 via-teal-500 to-purple-500 bg-gradient-to-r w-full h-64" *ngIf="!i
 
   <form class="card glass shadow-xl" [formGroup]="loginForm" (ngSubmit)="login()">
     <div class="card-body">
-      <h2 class="card-title">Login</h2>
+      <h2 class="card-title text-black">Login</h2>
 
       <div class="form-control w-full">
-        <label class="label"><span class="label-text">E-Mail</span></label>
+        <label class="label"><span class="label-text text-black">E-Mail</span></label>
         <input type="email" id="username" formControlName="username" placeholder="Type here" class="input input-bordered w-full">
       </div>
 
       <div *ngIf="loginForm.get('username')?.invalid &&
       (loginForm.get('username')?.dirty ||
       loginForm.get('username')?.touched) &&
-      loginForm.get('username')?.hasError('required')" class="bg-red-200">
-        Benutzername ist verpflichtend
-      </div>
-
-      <div *ngIf="loginForm.get('username')?.invalid &&
-      (loginForm.get('username')?.dirty ||
-      loginForm.get('username')?.touched) &&
-      loginForm.get('username')?.hasError('email')" class="bg-red-200">
-        E-Mail Format überprüfen
+      loginForm.get('username')?.hasError('email')" class="text-red-600">
+        Check E-Mail format
       </div>
 
       <div class="form-control w-full">
-        <label class="label"><span class="label-text">Password</span></label>
+        <label class="label"><span class="label-text text-black">Password</span></label>
         <input type="password" formControlName="password" placeholder="Type here" class="input input-bordered w-full">
-        <div *ngIf="loginForm.get('password')?.invalid &&
-        (loginForm.get('password')?.dirty ||
-        loginForm.get('password')?.touched)" class="bg-red-200">
-                Passwort ist verpflichtend
-        </div>
+      </div>
+
+      <div *ngIf="loginForm.get('password')?.invalid &&
+      (loginForm.get('password')?.dirty ||
+      loginForm.get('password')?.touched)" class="text-red-600">
+        Please insert a password
       </div>
 
       <button type="submit"
@@ -47,8 +41,8 @@ from-blue-600 via-teal-500 to-purple-500 bg-gradient-to-r w-full h-64" *ngIf="!i
 from-blue-600 via-teal-500 to-purple-500 bg-gradient-to-r w-full h-64" *ngIf="isLoggedIn()">
   <div class="card glass shadow-xl">
     <div class="card-body">
-      <h2 class="card-title">Do you really want to logout?</h2>
-      <button type="button" class="btn btn-primary mt-6" (click)="logout()">Logout</button>
+      <h2 class="card-title text-black">Do you really want to logout?</h2>
+      <button type="button" class="btn btn-primary mt-6 text-black" (click)="logout()">Logout</button>
     </div>
   </div>
 </div>

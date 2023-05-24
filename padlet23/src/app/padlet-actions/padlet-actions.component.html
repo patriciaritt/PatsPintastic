@@ -17,46 +17,39 @@
       <!-- title -->
       <div class="form-control w-full">
         <label class="label">
-          <span class="label-text">Padlet Name</span>
+          <span class="label-text after:content-['*']">Padlet Name</span>
         </label>
         <input formControlName="name" type="text" placeholder="Type here" class="input input-bordered w-full">
+        <div *ngIf="errors['name']" class="text-red-600 mt-2 mr-1">{{errors['name']}}</div>
       </div>
 
-      <!-- is_public -->
-      <div class="form-control w-full">
-        <label class="label">
-          <div class="flex flex-col">
-            <span class="label-text">Do you want to make this Padlet public? 👀 It's going to be visibile for the whole world!</span>
-            <input formControlName="is_public" type="checkbox" class="checkbox mt-1"/>
-          </div>
-        </label>
-      </div>
 
       <!-- image -->
       <div class="form-control w-full">
         <label class="label">
-          <span class="label-text">Padlet Image</span>
+          <span class="label-text after:content-['*']">Padlet Image</span>
         </label>
         <input formControlName="image" type="text" placeholder="Insert image link" class="input input-bordered w-full">
+        <div *ngIf="errors['image']" class="ext-red-600 mt-2 mr-1">{{errors['image']}}</div>
       </div>
 
-      <!-- date -->
-      <div class="form-control w-full">
+      <!-- is_public -->
+      <div class="form-control w-full" *ngIf="!isUpdateingPadlet || isCreator()">
         <label class="label">
-          <span class="label-text">Created at</span>
+          <div class="flex flex-col">
+            <span class="label-text mt-1">Do you want to make this Padlet public? 🗺️</span>
+            <input formControlName="is_public" type="checkbox" class="checkbox mt-1"/>
+          </div>
         </label>
-        <input type="text" placeholder="{{padlet.created_at | date:'longDate'}}" class="input input-bordered w-full max-w-xs" disabled/>
       </div>
     </div>
 
     <div class="flex justify-between ml-8 mr-8 mb-6">
       <!-- button to safe changes -->
-      <button type="submit" class="btn btn-primary">Safe changes</button>
-
-      <!-- button to open modal -->
+      <button type="submit" class="btn btn-primary" *ngIf="!isUpdateingPadlet || (hasEditRights(padlet?.id) || isCreator())">Safe changes</button>
 
       <!-- The button to open modal -->
-      <label for="my-modal-6" class="btn btn-error">Delete</label>
+      <label for="my-modal-6" class="btn btn-error" *ngIf="hasDeleteRights(padlet?.id) || isCreator()">Delete</label>
 
       <!-- Put this part before </body> tag -->
       <input type="checkbox" id="my-modal-6" class="modal-toggle" />
@@ -65,13 +58,45 @@
           <h3 class="font-bold text-lg">Do you really want to delete the padlet "{{padlet.name}}" and all it's Pins?</h3>
           <div class="flex justify-center items-center modal-action">
             <label for="my-modal-6" class="btn">Cancel</label>
-            <button class="btn btn-error max-w-[50%]" (click)="deletePadlet()">Delete</button>
+            <button class="btn btn-error max-w-[50%]"  *ngIf="hasDeleteRights(padlet?.id) || isCreator()" (click)="deletePadlet()">Delete</button>
           </div>
         </div>
       </div>
 
     </div>
 
+  </form>
+  <form class="card bg-base-100 shadow-xl ml-[15%] mr-[15%] mb-6" [formGroup]="userrightForm" (ngSubmit)="inviteUser(padlet.id)" *ngIf="isCreator()">
+    <div class="card-body">
+      <!-- heading -->
+      <h2 class="card-title">Invite others to your Padlet!</h2>
+
+      <div class="alert alert-success shadow-lg" *ngIf="showAlert">
+        <div>
+          <svg xmlns="http://www.w3.org/2000/svg" class="stroke-current flex-shrink-0 h-6 w-6" fill="none" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 12l2 2 4-4m6 2a9 9 0 11-18 0 9 9 0 0118 0z" /></svg>
+          <span>Wuhu! Successfully invited new user to your Padlet {{padlet.name}}</span>
+        </div>
+      </div>
+
+      <!-- give other user rights -->
+      <div class="form-control w-full">
+        <label class="label">
+          <div class="flex flex-col">
+            <span class="label-text mt-1 mb-2">Invite a user to your Padlet!</span>
+            <input formControlName="user_id" type="text" placeholder="usermail@gmail.com" class="input input-bordered w-full">
+          </div>
+        </label>
+        <label class="label">
+          <div>
+            <span class="label-text mt-1">What rights do you want to give this user?</span> <br>
+            <input formControlName="write" type="checkbox" class="checkbox"/> Can see and create Padlet and Pins <br>
+            <input formControlName="edit" type="checkbox" class="checkbox"/> Can see, create and edit Padlet and Pins<br>
+            <input formControlName="remove" type="checkbox" class="checkbox"/> Can  see, create, edit and delete Padlet and Pins<br>
+          </div>
+        </label>
+      </div>
+      <button type="submit" class="btn btn-primary">Invite User</button>
+    </div>
   </form>
 </div>
 

@@ -1,18 +1,21 @@
-<!-- TODO ==========> mit ngIf zusätzlich noch auf Rechte überprüfen (nicht nur is public) -->
-<figure *ngIf="padlet?.is_public || isCreator()"
-        class="max-w-[0px] max-h-[0px] md:max-w-[400px] md:max-h-[300px] lg:max-h-[250px]">
+<figure *ngIf="padlet?.is_public || authService.isLoggedIn() && (hasReadingRights(padlet?.id) || isCreator())"
+        class="max-w-[0px] max-h-[0px] md:max-w-[400px] md:max-h-[250px] lg:max-h-[250px]">
   <img src="{{padlet?.image}}" alt="Movie"/></figure>
-<div class="card-body" *ngIf="padlet?.is_public || isCreator()">
+<div class="card-body" *ngIf="padlet?.is_public || authService.isLoggedIn() && (hasReadingRights(padlet?.id) || isCreator())">
   <h2 class="card-title">{{padlet?.name}}</h2>
-  <p>Created at: {{padlet?.created_at | date:'longDate'}}</p>
+  <h3>Created at: {{padlet?.created_at | date:'longDate'}}</h3>
+  <!-- is private or public info -->
+  <span *ngIf="!padlet?.is_public; else publicPadlet">🔒 Private Padlet of {{getUserNameByPadletUserId(padlet?.user_id)}}</span>
+  <ng-template #publicPadlet>
+    <span>🗺️ Public Padlet of {{getUserNameByPadletUserId(padlet?.user_id)}}</span>
+  </ng-template>
+
   <div class="card-actions justify-end">
     <button class="btn btn-primary">Show Pins</button>
   </div>
 
-  <!-- TODO ==========> mit ngIf auf Rechte überprüfen -->
   <!-- edit button -->
-  <!-- *ngIf="authService.hasRights()"-->
-  <div class="absolute top-6 right-2" *ngIf="authService.isLoggedIn() && hasEditRights(padlet?.id)">
+  <div class="absolute top-8 right-6" *ngIf="authService.isLoggedIn() && (hasEditRights(padlet?.id) || isCreator())">
     <a routerLink="../padlets/padlet/{{padlet?.id}}"
        class="inline-flex items-center justify-center w-10 h-10 mr-2 text-gray-700 transition-colors duration-150 bg-white rounded-md focus:shadow-outline hover:bg-gray-200"
        routerLinkActive="active">
