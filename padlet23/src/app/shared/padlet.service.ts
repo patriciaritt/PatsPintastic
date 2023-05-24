@@ -3,8 +3,7 @@ import {Padlet} from "./padlet";
 import {Entrie} from "./entrie";
 import {HttpClient} from "@angular/common/http";
 import {catchError, map, Observable, retry, throwError} from "rxjs";
-import {Userright} from "./userright";
-import {User} from "./user";
+
 @Injectable({
   providedIn: 'root'
 })
@@ -45,10 +44,6 @@ export class PadletService {
   createPadlet(padlet:Padlet):Observable<any>
   {
     return this.http.post(`${this.api}/padlets`, padlet)
-      .pipe(retry(3)).pipe(catchError(this.errorHandler));
-  }
-  getCurrentUserRights(user_id:number){
-    return this.http.get<Array<User>>(`${this.api}/userrights/${user_id}`)
       .pipe(retry(3)).pipe(catchError(this.errorHandler));
   }
 

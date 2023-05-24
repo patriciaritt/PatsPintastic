@@ -53,7 +53,6 @@ export class AuthenticationService {
   setSessionStorage(token: string)
   {
     const decodedToken = jwt_decode(token) as Token;
-    console.log(decodedToken);
     sessionStorage.setItem("token", token);
     sessionStorage.setItem("userId", decodedToken.user.id);
     sessionStorage.setItem("firstName", decodedToken.user.firstName);
