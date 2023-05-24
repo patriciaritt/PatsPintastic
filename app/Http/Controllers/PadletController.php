@@ -69,8 +69,9 @@ class PadletController extends Controller
             $padlet->delete();
             return response()->json('padlet (' . $title . ') successfully deleted', 200);
         }
-        else
+        else {
             return response()->json('padlet could not be deleted - it does not exist', 422);
+        }
     }
 
     public function getUserNamesOfComments()

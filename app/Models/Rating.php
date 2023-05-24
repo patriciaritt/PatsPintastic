@@ -10,7 +10,17 @@ class Rating extends Model
 {
     use HasFactory;
 
-    protected $fillable = ['rating'];
+    protected $fillable = ['user_id', 'entrie_id', 'rating'];
+    protected $primaryKey = null;
+    public $incrementing = false;
+
+    /**
+     * rating has one creator (user)
+     */
+    public function user(): BelongsTo
+    {
+        return $this->belongsTo(User::class);
+    }
 
     /**
      * rating belongs to one entry

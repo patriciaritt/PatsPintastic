@@ -82,12 +82,13 @@ class PadletsTableSeeder extends Seeder
         $comment5 = new Comment();
         $comment5->user_id = 1;
         $comment5->entrie_id = 1;
-        $comment5->comment = 'Das kommt dann ganz auf die Webklausur drauf an 😉';
+        $comment5->comment = 'Das kommt drauf an wie die Webklausur am Freitag wird 😉';
         $comment5->save();
 
         $rating1 = new Rating();
+        $rating1->user_id = 1;
         $rating1->entrie_id = 1;
-        $rating1->rating = 4;
+        $rating1->rating = 1;
         $rating1->save();
 
         $entrie->comments()->saveMany([$comment1]);

@@ -20,7 +20,7 @@ return new class extends Migration
             $table->boolean('read')->default(true);
             $table->boolean('write')->default(false);
             $table->boolean('edit')->default(false);
-            $table->boolean('delete')->default(false);
+            $table->boolean('remove')->default(false);
             $table->timestamps();
         });
     }

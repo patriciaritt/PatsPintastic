@@ -21,7 +21,7 @@ class UserrightsTableSeeder extends Seeder
         $userrights->read = true;
         $userrights->write = true;
         $userrights->edit = true;
-        $userrights->delete = true;
+        $userrights->remove = true;
         $userrights->save();
 
         $userrights1 = new Userright();
@@ -30,7 +30,7 @@ class UserrightsTableSeeder extends Seeder
         $userrights1->read = true;
         $userrights1->write = true;
         $userrights1->edit = false;
-        $userrights1->delete = false;
+        $userrights1->remove = false;
         $userrights1->save();
     }
 }
