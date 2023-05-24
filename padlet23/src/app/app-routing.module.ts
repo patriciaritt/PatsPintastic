@@ -6,7 +6,6 @@ import {PadletDetailsComponent} from "./padlet-details/padlet-details.component"
 import {EntrieActionsComponent} from "./entrie-actions/entrie-actions.component";
 import {PadletActionsComponent} from "./padlet-actions/padlet-actions.component";
 import {LoginComponent} from "./login/login.component";
-import {CommentsRatingsComponent} from "./comments-ratings/comments-ratings.component";
 
 const routes: Routes = [
   {path:'', redirectTo: 'home', pathMatch:'full'},
@@ -15,8 +14,7 @@ const routes: Routes = [
   {path:'padlets/:id', component: PadletDetailsComponent},
   {path:'padlets/:id/entry/:entrie_id', component: EntrieActionsComponent},
   {path:'padlets/padlet/:id', component: PadletActionsComponent},
-  {path:'login', component: LoginComponent},
-  {path:'comments/:id/:entrie_id', component: CommentsRatingsComponent},
+  {path:'login', component: LoginComponent}
 ];
 
 @NgModule({
